@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import Select from "./components/UI/select/Select";
 
 export default function App() {
   const [userPosts, setUserPosts] = useState([
@@ -12,6 +13,13 @@ export default function App() {
       body: "Лучший в мире язык для фронта и его динамической обработки это JavaScrypt",
     },
   ]);
+  const [selectedSort, setSelectedSort] = useState("");
+
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    setUserPosts([...userPosts].sort((a, b) => a[sort].localeCompare(b[sort])));
+    console.log(sort);
+  };
 
   const createPost = (newPost) => {
     setUserPosts([...userPosts, newPost]);
@@ -23,16 +31,29 @@ export default function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
-      {userPosts.length !== 0 ? (
-        <PostList
-          remove={removePost}
-          posts={userPosts}
-          title="Список постов, связанных с User"
+      <section>
+        <PostForm create={createPost} />
+        <hr />
+        <Select
+          value={selectedSort}
+          onChange={sortPosts}
+          defaultValue="Сортировка"
+          options={[
+            { value: "title", name: "По названию" },
+            { value: "body", name: "По содержимому" },
+          ]}
         />
-      ) : (
-        <h1>Посты отсутствуют</h1>
-      )}
+
+        {userPosts.length !== 0 ? (
+          <PostList
+            remove={removePost}
+            posts={userPosts}
+            title="Список постов, связанных с User"
+          />
+        ) : (
+          <h1>Посты отсутствуют</h1>
+        )}
+      </section>
     </div>
   );
 }
