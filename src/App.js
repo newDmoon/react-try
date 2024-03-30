@@ -28,21 +28,12 @@ export default function App() {
       body: "Лучший в мире язык для фронта и его динамической обработки"
     },
   ]);
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [post, setPost] = useState({title: '', body : ''});
 
   const addNewPost = (e) => {
     e.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title,
-      body
-    };
-    console.log(body);
-    console.log(newPost);
-    setUserPosts([...userPosts, newPost]);
-    setTitle('')
-    setBody('')
+    setUserPosts([...userPosts, {...post, id : Date.now()}]);
+    setPost({title : '', body : ''})
   };
 
   return (
@@ -52,14 +43,14 @@ export default function App() {
         <Input
           type="text"
           placeholder="Название поста"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={post.title}
+          onChange={(e) => setPost({...post, title : e.target.value})}
         />
         <Input
           type="text"
           placeholder="Описание"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          value={post.body}
+          onChange={(e) => setPost({...post, body : e.target.value})}
         />
         <Button onClick={addNewPost}>Создать пост</Button>
       </form>
