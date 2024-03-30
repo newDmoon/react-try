@@ -1,4 +1,5 @@
 import "./Post.css"
+import Button from "./UI/button/Button"
 
 export default function Post(props) {
     return (
@@ -14,8 +15,8 @@ export default function Post(props) {
                 </div>
             </div>
             <div className="post__buttons">
-                    <button>Удалить</button>
-                    <button>Изменить</button>
+                <Button onClick={() => props.remove(props.post)}>Удалить</Button>
+                <Button>Изменить</Button>
             </div>
         </section>
     )

@@ -1,8 +1,14 @@
 .MyBtn {
-    padding: 5px 15px;
-    color: blueviolet;
-    font-size: 14px;
-    background: transparent;
-    cursor: pointer;
-    border: 1px solid blueviolet;
+  padding: 5px 15px;
+  color: blueviolet;
+  font-size: 14px;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  transition-duration: 0.4s;
+}
+
+.MyBtn:hover {
+  background-color: blueviolet;
+  color: white;
 }
