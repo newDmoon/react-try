@@ -24,11 +24,15 @@ export default function App() {
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList
-        remove={removePost}
-        posts={userPosts}
-        title="Список постов, связанных с User"
-      />
+      {userPosts.length !== 0 ? (
+        <PostList
+          remove={removePost}
+          posts={userPosts}
+          title="Список постов, связанных с User"
+        />
+      ) : (
+        <h1>Посты отсутствуют</h1>
+      )}
     </div>
   );
 }
