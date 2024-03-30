@@ -17,10 +17,14 @@ export default function App() {
     setUserPosts([...userPosts, newPost])
   }
 
+  const removePost = (post) => {
+    setUserPosts(userPosts.filter(p => p.id !== post.id))
+  }
+
   return (
     <div className="App">
       <PostForm create = {createPost}/>
-      <PostList posts={userPosts} title="Список постов, связанных с User" />
+      <PostList remove = {removePost} posts={userPosts} title="Список постов, связанных с User" />
     </div>
   );
 }
