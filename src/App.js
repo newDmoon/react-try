@@ -1,60 +1,25 @@
 import "./App.css";
 import { useState } from "react";
 import PostList from "./components/PostList";
-import Button from "./components/UI/button/Button";
-import Input from "./components/UI/input/Input";
+import PostForm from "./components/PostForm";
 
 export default function App() {
-  // eslint-disable-next-line
-  const [javaPosts, setJavaPosts] = useState([
-    { id: 1, title: "Java", description: "Самый лучший язык в мире" },
-    {
-      id: 2,
-      title: "Java",
-      description: "Лучший в мире язык для фронта и его динамической обработки",
-    },
-    {
-      id: 3,
-      title: "Java",
-      description:
-        "Лучший в мире язык для бека, если научиться использовать ASP.NET",
-    },
-  ]);
   const [userPosts, setUserPosts] = useState([
-    { id: 1, title: "User", body: "Самый лучший язык в мире" },
+    { id: 1, title: "User", body: "Самый лучший язык в мире это Java" },
     {
       id: 2,
       title: "User",
-      body: "Лучший в мире язык для фронта и его динамической обработки"
+      body: "Лучший в мире язык для фронта и его динамической обработки это JavaScrypt"
     },
   ]);
-  const [post, setPost] = useState({title: '', body : ''});
 
-  const addNewPost = (e) => {
-    e.preventDefault();
-    setUserPosts([...userPosts, {...post, id : Date.now()}]);
-    setPost({title : '', body : ''})
-  };
+  const createPost = (newPost) => {
+    setUserPosts([...userPosts, newPost])
+  }
 
   return (
     <div className="App">
-      <form>
-        {/* Управляемый компонент */}
-        <Input
-          type="text"
-          placeholder="Название поста"
-          value={post.title}
-          onChange={(e) => setPost({...post, title : e.target.value})}
-        />
-        <Input
-          type="text"
-          placeholder="Описание"
-          value={post.body}
-          onChange={(e) => setPost({...post, body : e.target.value})}
-        />
-        <Button onClick={addNewPost}>Создать пост</Button>
-      </form>
-      <PostList posts={javaPosts} title="Список постов, связанных с Java" />
+      <PostForm create = {createPost}/>
       <PostList posts={userPosts} title="Список постов, связанных с User" />
     </div>
   );
