@@ -6,7 +6,7 @@ export default function Post(props) {
             <div className="post__content">
                 <div className="title">
                     <strong>
-                        {props.post.id}. {props.post.title}
+                        {props.number}. {props.post.title}
                     </strong>
                 </div>
                 <div className="description">

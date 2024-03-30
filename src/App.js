@@ -41,6 +41,8 @@ export default function App() {
     console.log(body);
     console.log(newPost);
     setUserPosts([...userPosts, newPost]);
+    setTitle('')
+    setBody('')
   };
 
   return (
