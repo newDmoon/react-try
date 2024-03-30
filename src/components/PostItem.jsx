@@ -15,8 +15,8 @@ export default function Post(props) {
                 </div>
             </div>
             <div className="post__buttons">
-                    <Button onClick={() => props.remove(props.post)}>Удалить</Button>
-                    <Button>Изменить</Button>
+                <Button onClick={() => props.remove(props.post)}>Удалить</Button>
+                <Button>Изменить</Button>
             </div>
         </section>
     )
