@@ -2,41 +2,39 @@ import "./App.css";
 import { useMemo, useState } from "react";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
-import Select from "./components/UI/select/Select";
-import Input from "./components/UI/input/Input";
+import PostFilter from "./components/PostFilter";
 
 export default function App() {
   const [posts, setPosts] = useState([
-    { id: 1, title: "User", body: "Самый лучший язык в мире это Java" },
+    {
+      id: 1,
+      title: "Животные",
+      body: "Достаточно большой кастой является царство животные",
+    },
     {
       id: 2,
-      title: "User",
-      body: "Лучший в мире язык для фронта и его динамической обработки это JavaScrypt",
+      title: "Грибы",
+      body: "Неодназначным царством является царство грибов",
     },
   ]);
-  const [selectedSort, setSelectedSort] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [filter, setFilter] = useState({ sort: "", query: "" });
 
   // TODO хук useMemo используется чтобы кешировать состояние, иначе при каждом вводе символа в поисковой строке рендерились и посты
   const sortedPosts = useMemo(() => {
     console.log("СОРТИРОВКА ВЫЗВАНА");
-    if (selectedSort) {
+    if (filter.sort) {
       return [...posts].sort((a, b) =>
-        a[selectedSort].localeCompare(b[selectedSort])
+        a[filter.sort].localeCompare(b[filter.sort])
       );
     }
     return posts;
-  }, [selectedSort, posts]);
+  }, [filter.sort, posts]);
 
   const sortedAndSearchedPosts = useMemo(() => {
     return sortedPosts.filter((post) =>
-      post.title.toLowerCase().includes(searchQuery)
+      post.title.toLowerCase().includes(filter.query)
     );
-  }, [searchQuery, sortedPosts]);
-
-  const sortPosts = (sort) => {
-    setSelectedSort(sort);
-  };
+  }, [filter.query, sortedPosts]);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -52,29 +50,12 @@ export default function App() {
         <PostForm create={createPost} />
         <hr />
         <section>
-          <Select
-            value={selectedSort}
-            onChange={sortPosts}
-            defaultValue="Сортировка"
-            options={[
-              { value: "title", name: "По названию" },
-              { value: "body", name: "По содержимому" },
-            ]}
+          <PostFilter filter={filter} setFilter={setFilter} />
+          <PostList
+            remove={removePost}
+            posts={sortedAndSearchedPosts}
+            title="Список постов, связанных с User"
           />
-          <Input
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Поиск"
-          />
-          {sortedAndSearchedPosts.length !== 0 ? (
-            <PostList
-              remove={removePost}
-              posts={sortedAndSearchedPosts}
-              title="Список постов, связанных с User"
-            />
-          ) : (
-            <h1>Посты отсутствуют</h1>
-          )}
         </section>
       </section>
     </div>
