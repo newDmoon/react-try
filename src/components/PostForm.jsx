@@ -17,15 +17,16 @@ export default function PostForm({ create }) {
 
     return (<form>
         {/* Управляемый компонент */}
+        <h1>Добавление поста</h1>
         <Input
             type="text"
-            placeholder="Название поста"
+            placeholder="Название"
             value={post.title}
             onChange={(e) => setPost({ ...post, title: e.target.value })}
         />
         <Input
             type="text"
-            placeholder="Описание"
+            placeholder="Содержание"
             value={post.body}
             onChange={(e) => setPost({ ...post, body: e.target.value })}
         />

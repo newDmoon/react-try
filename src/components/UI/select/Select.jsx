@@ -1,6 +1,8 @@
+import classes from "./Select.module.css"
+
 export default function Select({ options, defaultValue, value, onChange }) {
     return (
-        <select
+        <select className={classes.MySelect}
             value={value}
             onChange={event => onChange(event.target.value)}
         >
