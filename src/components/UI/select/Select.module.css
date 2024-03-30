@@ -1,0 +1,15 @@
+.MySelect{
+    padding: 5px 10px;
+    box-sizing: content-box;
+    color: blueviolet;
+    background-color: transparent;
+    border: 1px solid blueviolet;
+    margin: 10px 0;
+    transition-duration: 0.4s;
+}
+
+.MySelect:hover {
+    color: white;
+    background-color: blueviolet;
+    background-color: blueviolet;
+}

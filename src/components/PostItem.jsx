@@ -1,7 +1,7 @@
 import "./Post.css"
 import Button from "./UI/button/Button"
 
-export default function Post(props) {
+export default function PostItem(props) {
     return (
         <section className="post">
             <div className="post__content">
