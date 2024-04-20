@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
+import Modal from "./components/UI/modal/Modal";
+import Button from "./components/UI/button/Button";
 
 export default function App() {
   const [posts, setPosts] = useState([
@@ -18,6 +20,7 @@ export default function App() {
     },
   ]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [modal, setModal] = useState(false);
 
   // TODO хук useMemo используется чтобы кешировать состояние, иначе при каждом вводе символа в поисковой строке рендерились и посты
   const sortedPosts = useMemo(() => {
@@ -38,6 +41,7 @@ export default function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+    setModal(false)
   };
 
   const removePost = (post) => {
@@ -47,8 +51,15 @@ export default function App() {
   return (
     <div className="App">
       <section className="postsFeature">
-        <PostForm create={createPost} />
+        <section>
+          <Button style={{marginTop : 20}} onClick={() => setModal(true)}>Добавить пост</Button>
+          <Modal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+          </Modal>
+        </section>
+
         <hr />
+
         <section>
           <PostFilter filter={filter} setFilter={setFilter} />
           <PostList
