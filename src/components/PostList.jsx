@@ -1,5 +1,5 @@
 import PostItem from "./PostItem"
-import "./../style/PostList.css"
+import "./../styles/PostList.css"
 import { TransitionGroup } from "react-transition-group"
 import { CSSTransition } from "react-transition-group"
 
