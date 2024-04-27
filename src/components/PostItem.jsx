@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom"
 import "./Post.css"
 import Button from "./UI/button/Button"
 
 export default function PostItem(props) {
+    const router = useNavigate()
+
     return (
         <section className="post">
             <div className="post__content">
@@ -15,8 +18,8 @@ export default function PostItem(props) {
                 </div>
             </div>
             <div className="post__buttons">
+                <Button onClick={() => router(`/posts/${props.post.id}`)}>Открыть</Button>
                 <Button onClick={() => props.remove(props.post)}>Удалить</Button>
-                <Button>Открыть</Button>
             </div>
         </section>
     )
