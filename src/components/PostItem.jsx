@@ -7,7 +7,7 @@ export default function PostItem(props) {
             <div className="post__content">
                 <div className="title">
                     <strong>
-                        {props.number}. {props.post.title}
+                        {props.post.id}. {props.post.title}
                     </strong>
                 </div>
                 <div className="description">
