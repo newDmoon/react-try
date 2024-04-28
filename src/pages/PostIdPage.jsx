@@ -9,12 +9,12 @@ export default function PostIdPage() {
     const [post, setPost] = useState({});
     const [comments, setComments] = useState([])
 
-    const [fetchPostById, isLoading, error] = useFetching(async (id) => {
+    const [fetchPostById, isLoading] = useFetching(async (id) => {
         const response = await PostService.getOneById(id)
         setPost(response.data)
     })
 
-    const [fetchComments, isCommentsLoading, comError] = useFetching(async (id) => {
+    const [fetchComments, isCommentsLoading] = useFetching(async (id) => {
         const response = await PostService.getCommentsByPostId(id)
         setComments(response.data)
     })
