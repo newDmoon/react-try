@@ -1,19 +1,13 @@
-import About from "../pages/About";
-import Posts from "../pages/Posts";
-import Welcome from "../pages/Welcome";
-import Error from "../pages/Error";
 import { Route, Routes } from "react-router-dom";
-import PostIdPage from "../pages/PostIdPage";
+import { routes } from "../router/routes"
 
 export default function AppRouter() {
     return (
         <>
             <Routes>
-                <Route path="about" element={<About />} />
-                <Route exact path="posts" element={<Posts />} />
-                <Route exact path="posts/:id" element={<PostIdPage />} />
-                <Route path="welcome" element={<Welcome />} />
-                <Route path="*" element={<Error />} />
+                {routes.map(route =>
+                    <Route Component={route.Component} path={route.path} element={route.element} exact={route.exact} />
+                )}
             </Routes>
         </>
     )
