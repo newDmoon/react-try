@@ -36,8 +36,8 @@ export default function PostIdPage() {
             <h1>Коммментарии</h1>
             {isCommentsLoading
                 ? <Loader />
-                : comments.map(comment => 
-                    <div>
+                : comments.map(comment =>
+                    <div key={comment.id}>
                         <h5>{comment.name}</h5>
                         <h5>{comment.email}</h5>
                         <p>{comment.body}</p>
